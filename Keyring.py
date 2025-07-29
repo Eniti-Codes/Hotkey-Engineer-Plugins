@@ -2,16 +2,42 @@ import keyring
 import pyautogui
 import time
 import sys
-import os # For checking secret-tool availability
+import os
+import subprocess
 
-# --- Configuration: Make sure these are accurate! ---
-# Use the EXACT SERVICE_ID and USERNAME you set with secret-tool
-# Example: SERVICE_ID = "com.mom.masterpassword"
-# Example: USERNAME = "my_main_login"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# ----- > Configure this <-----
+# Define the name of your virtual environment folder.
+VENV_FOLDER_NAME = "venv" # <--- CONFIGURE THIS NAME!
+
+VENV_ROOT_DIR = os.path.join(SCRIPT_DIR, VENV_FOLDER_NAME)
+
+EXPECTED_PYTHON_EXEC = os.path.join(VENV_ROOT_DIR, 'bin', 'python3')
+
+if sys.executable != EXPECTED_PYTHON_EXEC:
+    print(f"DEBUG: Script currently running with: {sys.executable}")
+    print(f"DEBUG: Expected virtual environment Python: {EXPECTED_PYTHON_EXEC}")
+
+    if not os.path.exists(EXPECTED_PYTHON_EXEC):
+        print(f"ERROR: Expected virtual environment Python executable not found at: {EXPECTED_PYTHON_EXEC}")
+        print(f"Please ensure '{VENV_FOLDER_NAME}' folder is in the same directory as '{os.path.basename(__file__)}'.")
+        print("Also check that VENV_FOLDER_NAME is correctly spelled and the venv is created.")
+        sys.exit(1)
+
+    print("DEBUG: Relaunching script with virtual environment Python...")
+    command = [EXPECTED_PYTHON_EXEC, sys.argv[0]] + sys.argv[1:]
+
+    result = subprocess.run(command, check=False)
+    sys.exit(result.returncode)
+
+print(f"DEBUG: Script confirmed running with: {sys.executable}")
+
+# ----- > Configure this <-----
 SERVICE_ID = "Kindergarten.CaptainSauce" # <-- REPLACE It
 USERNAME = "Mrs.Applegate" # <-- REPLACE It
 
-# --- Helper functions (from our debugging journey) ---
+
 def is_secret_tool_available():
     """Checks if the 'secret-tool' command is available on the system."""
     return os.system("which secret-tool > /dev/null 2>&1") == 0
@@ -22,7 +48,6 @@ def get_master_password_from_keyring():
         password = keyring.get_password(SERVICE_ID, USERNAME)
 
         if password:
-            # Check for duplicated password string (our specific bug!)
             password_length = len(password)
             if password_length % 2 == 0 and password_length > 0:
                 first_half = password[:password_length // 2]
@@ -38,7 +63,7 @@ def get_master_password_from_keyring():
                     print(f"     secret-tool store --label=\"Hotkey Engineer Master Password\" service \"{SERVICE_ID}\" username \"{USERNAME}\"")
                     print("     (Enter your password carefully when prompted.)")
                     print("Exiting to prevent incorrect typing.")
-                    return None # Indicate failure
+                    return None
             return password
         else:
             print("\n!!! ERROR: Password not found in keyring! !!!")
