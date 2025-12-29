@@ -5,7 +5,6 @@ This repository houses the official plugins for **Hotkey Engineer**, developed e
 ---
 
 ### Available Official Plugins
-
 | Plugin Name | Description |
 | :--- | :--- |
 | **Auto Clicker** | A foundational plugin that provides customizable, automated mouse clicking functionality. |
@@ -13,6 +12,7 @@ This repository houses the official plugins for **Hotkey Engineer**, developed e
 | **Tea Time** | A simple but essential utility that sends you a reminder to drink tea (or take a break!) every 3600 seconds. |
 | **Hotkey Password** | Integrates with your system's keyring to securely type passwords into a password manager, prioritizing **safety first**. **It does not copy the password to your clipboard**; it securely retrieves it from your keyring and directly types it into the active password field. **Highly recommended for users of password managers.** |
 | **Bash runer** | Run your bash script in terminal. |
+| **Repeat Key** | is a high-performance, modern automation utility for mouse and keyboard tasks. Featuring a clean UI and millisecond precision, it is designed to work as a standalone tool or as a seamless plugin for Hotkey Engineer. |
 
 ---
 
