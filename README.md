@@ -1,3 +1,16 @@
+# PROJECT MIGRATION NOTICE
+**Hotkey Engineer Plugins has moved.** All active development and future updates have been migrated to platforms that better align with our commitment to independent, open-source software.
+
+### The New Hubs:
+* **Primary Home** [CodeBerg](https://codeberg.org/Eniti-Codes).
+* **Secondary Mirror** [GitLab](https://gitlab.com/Eniti-Codes). 
+
+### Important Release Info:
+* **GitHub is now a static mirror.** The code currently here is preserved for legacy use. 
+* **All future versions will NOT be released on GitHub.**
+* **Exclusive Projects:** Several of my other public projects (and future secrets) are hosted exclusively on Codeberg and GitLab. Explore the profiles there to see what else is in the works.
+---
+
 ## Hotkey Engineer Official Plugins
 
 This repository houses the official plugins for **Hotkey Engineer**, developed either by myself or trusted community members. Each plugin here is **guaranteed to work seamlessly with the Hotkey Engineer software**, ensuring robust and reliable functionality.
